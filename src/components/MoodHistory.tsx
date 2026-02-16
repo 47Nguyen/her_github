@@ -7,21 +7,23 @@ interface MoodEntry {
   emoji: string;
   mood_label: string;
   notes: string | null;
+  role: string;
   created_at: string;
 }
 
 interface MoodHistoryProps {
   moods: MoodEntry[];
+  currentRole: "boy" | "girl";
 }
 
-const MoodHistory = ({ moods }: MoodHistoryProps) => {
+const MoodHistory = ({ moods, currentRole }: MoodHistoryProps) => {
   if (moods.length === 0) {
     return (
       <Card className="glass-card soft-shadow">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 font-display text-2xl text-foreground">
-            <Calendar className="h-6 w-6 text-peach" />
-            Mood History
+            <Calendar className={`h-6 w-6 ${currentRole === "girl" ? "text-girl-accent" : "text-boy-accent"}`} />
+            {currentRole === "girl" ? "Her Moods 🌸" : "His Moods 💙"}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -37,8 +39,8 @@ const MoodHistory = ({ moods }: MoodHistoryProps) => {
     <Card className="glass-card soft-shadow">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 font-display text-2xl text-foreground">
-          <Calendar className="h-6 w-6 text-peach" />
-          Mood History
+          <Calendar className={`h-6 w-6 ${currentRole === "girl" ? "text-girl-accent" : "text-boy-accent"}`} />
+          {currentRole === "girl" ? "Her Moods 🌸" : "His Moods 💙"}
         </CardTitle>
       </CardHeader>
       <CardContent>
